@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['path_20planning_8',['Path Planning',['../Path_Planning.html',1,'']]]
+  ['path_20planning_8',['Path Planning',['../path_planning.html',1,'']]]
 ];

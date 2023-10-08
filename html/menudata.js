@@ -25,4 +25,5 @@ var menudata={children:[
 {text:"Filters Localisation",url:"filters_page.html"},
 {text:"World",url:"world_page.html"},
 {text:"Mock Noise",url:"noise_page.html"},
+{text:"Path Planning",url:"path_planning.html"},
 {text:"Related Pages",url:"pages.html"}]}

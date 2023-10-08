@@ -1,4 +1,4 @@
-\page Path_Planning Path Planning
+\page path_planning Path Planning
 
 # To run:
 ### Build package:
