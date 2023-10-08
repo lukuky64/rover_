@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rs1_2dprojectrover_3',['RS1-ProjectRover',['../index.html',1,'']]]
+  ['path_20planning_3',['Path Planning',['../Path_Planning.html',1,'']]]
 ];

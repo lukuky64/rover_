@@ -1,7 +1,7 @@
 var indexSectionsWithContent =
 {
-  0: "glmr",
-  1: "glmr"
+  0: "glmpr",
+  1: "glmpr"
 };
 
 var indexSectionNames =

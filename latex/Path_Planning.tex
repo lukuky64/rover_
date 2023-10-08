@@ -1,0 +1,54 @@
+\hypertarget{Path_Planning_autotoc_md59}{}\doxysection{To run\+:}\label{Path_Planning_autotoc_md59}
+\hypertarget{Path_Planning_autotoc_md60}{}\doxysubsubsection{Build package\+:}\label{Path_Planning_autotoc_md60}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd \string~/catkin\_ws}
+\DoxyCodeLine{catkin\_make -\/-\/pkg rs\_odom\_noise}
+\DoxyCodeLine{source devel/setup.bash}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md61}{}\doxysubsubsection{Roslaunch robot\+:}\label{Path_Planning_autotoc_md61}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roslaunch blah blah blah}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md62}{}\doxysubsubsection{For data logging\+:}\label{Path_Planning_autotoc_md62}
+Before you start rs\+\_\+odom\+\_\+noise\+\_\+record, ensure that you are subscribing to a filter topic that is already running (if you wish to log it).\hypertarget{Path_Planning_autotoc_md63}{}\doxysubsubsection{Start the node\+:}\label{Path_Planning_autotoc_md63}
+\hypertarget{Path_Planning_autotoc_md64}{}\doxyparagraph{For just publishing noisy odometry\+:}\label{Path_Planning_autotoc_md64}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_create\_noise}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md65}{}\doxyparagraph{For just recording data\+:}\label{Path_Planning_autotoc_md65}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_record}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md66}{}\doxyparagraph{For publishing noisy odometry and recording data at the same time\+:}\label{Path_Planning_autotoc_md66}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_create\_noise\_and\_record}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md67}{}\doxysection{Using rosbag and saving C\+S\+V Data\+:}\label{Path_Planning_autotoc_md67}
+download rosbag\+: \href{https://www.dropbox.com/scl/fi/qx0ws6hl76cfxs1qln4k7/noisy_odometry.bag?rlkey=gvtnqx8ieo1wc0ryr2d89txre&dl=0}{\texttt{ https\+://www.\+dropbox.\+com/scl/fi/qx0ws6hl76cfxs1qln4k7/noisy\+\_\+odometry.\+bag?rlkey=gvtnqx8ieo1wc0ryr2d89txre\&dl=0}}\hypertarget{Path_Planning_autotoc_md68}{}\doxysubsubsection{Start roscore\+:}\label{Path_Planning_autotoc_md68}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roscore}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md69}{}\doxysubsubsection{Load rosbag (initially paused)\+:}\label{Path_Planning_autotoc_md69}
+cd to rosbag location 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosbag play -\/-\/pause noisy\_odometry.bag}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md70}{}\doxysubsubsection{Enable filter/localisation (of your choice)\+:}\label{Path_Planning_autotoc_md70}
+eg\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roslaunch robot\_pose\_ekf robot\_pose\_ekf.launch}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md71}{}\doxysubsubsection{Start data recording node\+:}\label{Path_Planning_autotoc_md71}
+cd to your desired save location for the .csv file 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_record}
+\end{DoxyCode}
+\hypertarget{Path_Planning_autotoc_md72}{}\doxysubsubsection{Start rosbag\+:}\label{Path_Planning_autotoc_md72}
+press {\ttfamily space} in the window where \textquotesingle{}rosbag play\textquotesingle{} entered\hypertarget{Path_Planning_autotoc_md73}{}\doxysubsubsection{Finish recording\+:}\label{Path_Planning_autotoc_md73}
+When rosbag is done, press {\ttfamily Ctrl+C} on the recording node to stop recording to the .csv file 
