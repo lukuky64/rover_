@@ -1,0 +1,47 @@
+\hypertarget{md_rs_gazebo_world_README2_autotoc_md24}{}\doxysection{Installation\+:}\label{md_rs_gazebo_world_README2_autotoc_md24}
+export R\+O\+S\+\_\+\+D\+I\+S\+T\+RO=noetic source /opt/ros/\$\+R\+O\+S\+\_\+\+D\+I\+S\+T\+RO/setup.bash
+
+cd $\sim$/catkin\+\_\+ws/src git clone \href{https://github.com/AprilRobotics/apriltag_ros.git}{\texttt{ https\+://github.\+com/\+April\+Robotics/apriltag\+\_\+ros.\+git}}
+
+cd $\sim$/catkin\+\_\+ws rosdep install --from-\/paths src --ignore-\/src -\/r -\/y catkin\+\_\+make\hypertarget{md_rs_gazebo_world_README2_autotoc_md25}{}\doxysection{S\+E\+T\+U\+P\+:}\label{md_rs_gazebo_world_README2_autotoc_md25}
+\hypertarget{md_rs_gazebo_world_README2_autotoc_md26}{}\doxysubsection{Set tag family (using 36h11 by default, so you don\textquotesingle{}t need to do this step)\+:}\label{md_rs_gazebo_world_README2_autotoc_md26}
+gedit $\sim$/catkin\+\_\+ws/src/apriltag\+\_\+ros/apriltag\+\_\+ros/config/settings.yaml\hypertarget{md_rs_gazebo_world_README2_autotoc_md27}{}\doxysubsection{Add standalone tags\+:}\label{md_rs_gazebo_world_README2_autotoc_md27}
+gedit $\sim$/catkin\+\_\+ws/src/apriltag\+\_\+ros/apriltag\+\_\+ros/config/tags.yaml \hypertarget{md_rs_gazebo_world_README2_autotoc_md28}{}\doxysubsubsection{replace\+:}\label{md_rs_gazebo_world_README2_autotoc_md28}
+standalone\+\_\+tags\+: \mbox{[} \mbox{]} \hypertarget{md_rs_gazebo_world_README2_autotoc_md29}{}\doxysubsubsection{with\+:}\label{md_rs_gazebo_world_README2_autotoc_md29}
+standalone\+\_\+tags\+: \mbox{[} \{id\+: 0, size\+: 1.\+0, description\+: \char`\"{}\+T\+A\+G\+\_\+0\char`\"{}\}, \{id\+: 1, size\+: 1.\+0, description\+: \char`\"{}\+T\+A\+G\+\_\+1\char`\"{}\}, \{id\+: 2, size\+: 1.\+0, description\+: \char`\"{}\+T\+A\+G\+\_\+2\char`\"{}\}, \{id\+: 3, size\+: 1.\+0, description\+: \char`\"{}\+T\+A\+G\+\_\+3\char`\"{}\}, \{id\+: 4, size\+: 1.\+0, description\+: \char`\"{}\+T\+A\+G\+\_\+4\char`\"{}\}, \{id\+: 5, size\+: 1.\+0, description\+: \char`\"{}\+T\+A\+G\+\_\+5\char`\"{}\} \mbox{]}\hypertarget{md_rs_gazebo_world_README2_autotoc_md30}{}\doxysubsection{Calibrate Camera ($<$tt$>$\+D\+O\+N\+T W\+O\+R\+R\+Y A\+B\+O\+U\+T F\+O\+R N\+O\+W$<$/tt$>$)\+:}\label{md_rs_gazebo_world_README2_autotoc_md30}
+\hypertarget{md_rs_gazebo_world_README2_autotoc_md31}{}\doxysubsubsection{Install calibration library\+:}\label{md_rs_gazebo_world_README2_autotoc_md31}
+rosdep install camera\+\_\+calibration\hypertarget{md_rs_gazebo_world_README2_autotoc_md32}{}\doxysubsubsection{Calibrate steps (change –square 0.\+024 to actual size in metres)\+:}\label{md_rs_gazebo_world_README2_autotoc_md32}
+roslaunch usb\+\_\+cam usb\+\_\+cam-\/test.\+launch rosrun camera\+\_\+calibration cameracalibrator.\+py --size 8x6 --square 0.\+024 image\+:=/camera/image\+\_\+raw camera\+:=/camera Note\+: Save file to a location, the \textquotesingle{}ost.\+yaml\textquotesingle{} file contains the useful data\hypertarget{md_rs_gazebo_world_README2_autotoc_md33}{}\doxysubsubsection{Edit\+:}\label{md_rs_gazebo_world_README2_autotoc_md33}
+gedit $\sim$/catkin\+\_\+ws/src/launch/usb\+\_\+cam-\/test.launch\hypertarget{md_rs_gazebo_world_README2_autotoc_md34}{}\doxysubsubsection{Add line (file location to match where you saved \textquotesingle{}ost.\+yaml\textquotesingle{})\+:}\label{md_rs_gazebo_world_README2_autotoc_md34}
+
+\begin{DoxyParams}{Parameters}
+{\em camera\+\_\+info\+\_\+url} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{md_rs_gazebo_world_README2_autotoc_md35}{}\doxysection{L\+A\+U\+N\+C\+H\+:}\label{md_rs_gazebo_world_README2_autotoc_md35}
+\hypertarget{md_rs_gazebo_world_README2_autotoc_md36}{}\doxysubsection{Launch a camera publishing node (2 options)\+:}\label{md_rs_gazebo_world_README2_autotoc_md36}
+\hypertarget{md_rs_gazebo_world_README2_autotoc_md37}{}\doxysubsubsection{$<$tt$>$\+O\+P\+T\+I\+O\+N 1\+:$<$/tt$>$ U\+S\+B C\+A\+M\+:}\label{md_rs_gazebo_world_README2_autotoc_md37}
+roslaunch usb\+\_\+cam usb\+\_\+cam-\/test.\+launch\hypertarget{md_rs_gazebo_world_README2_autotoc_md38}{}\doxysubsubsection{$<$tt$>$\+O\+P\+T\+I\+O\+N 2\+:$<$/tt$>$ turtle\+Bot3\+:}\label{md_rs_gazebo_world_README2_autotoc_md38}
+export T\+U\+R\+T\+L\+E\+B\+O\+T3\+\_\+\+M\+O\+D\+EL=waffle\+\_\+pi roslaunch rs\+\_\+gazebo\+\_\+world turtlebot3\+\_\+marker.\+launch
+
+export T\+U\+R\+T\+L\+E\+B\+O\+T3\+\_\+\+M\+O\+D\+EL=waffle\+\_\+pi roslaunch turtlebot3\+\_\+gazebo turtlebot3\+\_\+gazebo\+\_\+rviz.\+launch\hypertarget{md_rs_gazebo_world_README2_autotoc_md39}{}\doxysubsection{Launch detection for turtlebot\+:}\label{md_rs_gazebo_world_README2_autotoc_md39}
+roslaunch apriltag\+\_\+ros continuous\+\_\+detection.\+launch camera\+\_\+name\+:=\char`\"{}/camera\char`\"{} image\+\_\+topic\+:=\char`\"{}/rgb/image\+\_\+raw\char`\"{} queue\+\_\+size\+:=\char`\"{}1\char`\"{}\hypertarget{md_rs_gazebo_world_README2_autotoc_md40}{}\doxysubsection{Launch detection for U\+S\+B-\/camera\+:}\label{md_rs_gazebo_world_README2_autotoc_md40}
+roslaunch apriltag\+\_\+ros continuous\+\_\+detection.\+launch camera\+\_\+name\+:=\char`\"{}/usb\+\_\+cam\char`\"{} image\+\_\+topic\+:=\char`\"{}/rgb/image\+\_\+raw\char`\"{} queue\+\_\+size\+:=\char`\"{}1\char`\"{}\hypertarget{md_rs_gazebo_world_README2_autotoc_md41}{}\doxysubsection{View detection\+:}\label{md_rs_gazebo_world_README2_autotoc_md41}
+rqt\+\_\+image\+\_\+view click {\ttfamily dropdown} -\/$>$ {\ttfamily tag\+\_\+detections\+\_\+image}\hypertarget{md_rs_gazebo_world_README2_autotoc_md42}{}\doxysubsection{Working\+:}\label{md_rs_gazebo_world_README2_autotoc_md42}
+\hypertarget{md_rs_gazebo_world_README2_autotoc_md43}{}\doxysubsection{Reference List}\label{md_rs_gazebo_world_README2_autotoc_md43}
+April Tag Models\+: \href{https://github.com/koide3/gazebo_apriltag.git}{\texttt{ https\+://github.\+com/koide3/gazebo\+\_\+apriltag.\+git}} ~\newline
+ AR Tracking 1\+: \href{http://wiki.ros.org/apriltag_ros}{\texttt{ http\+://wiki.\+ros.\+org/apriltag\+\_\+ros}} ~\newline
+ \sout{AR Tracking 2\+: \href{http://wiki.ros.org/ar_track_alvar}{\texttt{ http\+://wiki.\+ros.\+org/ar\+\_\+track\+\_\+alvar}}}
+
+Turtlebot3 + D435i\+:
+\begin{DoxyItemize}
+\item \href{https://www.youtube.com/watch?v=hpUCG6K5muI}{\texttt{ https\+://www.\+youtube.\+com/watch?v=hp\+U\+C\+G6\+K5muI}}
+\item \href{https://github.com/rickstaa/realsense-ros-gazebo}{\texttt{ https\+://github.\+com/rickstaa/realsense-\/ros-\/gazebo}}
+\item \href{https://github.com/pal-robotics-forks/realsense}{\texttt{ https\+://github.\+com/pal-\/robotics-\/forks/realsense}}
+\item \href{https://github.com/pal-robotics-forks/realsense/tree/kinetic-devel/realsense2_description/urdf}{\texttt{ https\+://github.\+com/pal-\/robotics-\/forks/realsense/tree/kinetic-\/devel/realsense2\+\_\+description/urdf}}
+\end{DoxyItemize}
+
+S\+L\+AM with D435i\+:
+\begin{DoxyItemize}
+\item \href{https://github.com/IntelRealSense/realsense-ros/wiki/SLAM-with-D435i}{\texttt{ https\+://github.\+com/\+Intel\+Real\+Sense/realsense-\/ros/wiki/\+S\+L\+A\+M-\/with-\/\+D435i}} 
+\end{DoxyItemize}

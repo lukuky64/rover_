@@ -1,0 +1,53 @@
+\hypertarget{md_rs_odom_noise_README3_autotoc_md45}{}\doxysubsection{Build package\+:}\label{md_rs_odom_noise_README3_autotoc_md45}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd \string~/catkin\_ws}
+\DoxyCodeLine{catkin\_make -\/-\/pkg rs\_odom\_noise}
+\DoxyCodeLine{source devel/setup.bash}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md46}{}\doxysubsection{Roslaunch robot\+:}\label{md_rs_odom_noise_README3_autotoc_md46}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roslaunch blah blah blah}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md47}{}\doxysubsection{For data logging\+:}\label{md_rs_odom_noise_README3_autotoc_md47}
+Before you start rs\+\_\+odom\+\_\+noise\+\_\+record, ensure that you are subscribing to a filter topic that is already running (if you wish to log it).\hypertarget{md_rs_odom_noise_README3_autotoc_md48}{}\doxysubsection{Start the node\+:}\label{md_rs_odom_noise_README3_autotoc_md48}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md49}{}\doxysubsubsection{For just publishing noisy odometry\+:}\label{md_rs_odom_noise_README3_autotoc_md49}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_create\_noise}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md50}{}\doxysubsubsection{For just recording data\+:}\label{md_rs_odom_noise_README3_autotoc_md50}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_record}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md51}{}\doxysubsubsection{For publishing noisy odometry and recording data at the same time\+:}\label{md_rs_odom_noise_README3_autotoc_md51}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_create\_noise\_and\_record}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md52}{}\doxysection{Using rosbag and saving C\+S\+V Data\+:}\label{md_rs_odom_noise_README3_autotoc_md52}
+download rosbag\+: \href{https://www.dropbox.com/scl/fi/qx0ws6hl76cfxs1qln4k7/noisy_odometry.bag?rlkey=gvtnqx8ieo1wc0ryr2d89txre&dl=0}{\texttt{ https\+://www.\+dropbox.\+com/scl/fi/qx0ws6hl76cfxs1qln4k7/noisy\+\_\+odometry.\+bag?rlkey=gvtnqx8ieo1wc0ryr2d89txre\&dl=0}}\hypertarget{md_rs_odom_noise_README3_autotoc_md53}{}\doxysubsubsection{Start roscore\+:}\label{md_rs_odom_noise_README3_autotoc_md53}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roscore}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md54}{}\doxysubsubsection{Load rosbag (initially paused)\+:}\label{md_rs_odom_noise_README3_autotoc_md54}
+cd to rosbag location 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosbag play -\/-\/pause noisy\_odometry.bag}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md55}{}\doxysubsubsection{Enable filter/localisation (of your choice)\+:}\label{md_rs_odom_noise_README3_autotoc_md55}
+eg\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roslaunch robot\_pose\_ekf robot\_pose\_ekf.launch}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md56}{}\doxysubsubsection{Start data recording node\+:}\label{md_rs_odom_noise_README3_autotoc_md56}
+cd to your desired save location for the .csv file 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_record}
+\end{DoxyCode}
+\hypertarget{md_rs_odom_noise_README3_autotoc_md57}{}\doxysubsubsection{Start rosbag\+:}\label{md_rs_odom_noise_README3_autotoc_md57}
+press {\ttfamily space} in the window where \textquotesingle{}rosbag play\textquotesingle{} entered\hypertarget{md_rs_odom_noise_README3_autotoc_md58}{}\doxysubsubsection{Finish recording\+:}\label{md_rs_odom_noise_README3_autotoc_md58}
+When rosbag is done, press {\ttfamily Ctrl+C} on the recording node to stop recording to the .csv file 

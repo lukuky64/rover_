@@ -1,0 +1,148 @@
+\textbackslash{}\+Filters Localisation Filters\hypertarget{md_rs_filters_README1_autotoc_md4}{}\doxysection{Using Particle filter / Monte Carlo Localisation}\label{md_rs_filters_README1_autotoc_md4}
+\hypertarget{md_rs_filters_README1_autotoc_md5}{}\doxysubsection{For Turtle\+Bot3}\label{md_rs_filters_README1_autotoc_md5}
+\hypertarget{md_rs_filters_README1_autotoc_md6}{}\doxysubsubsection{Grid Mapping\+:}\label{md_rs_filters_README1_autotoc_md6}
+\hypertarget{md_rs_filters_README1_autotoc_md7}{}\doxysubsubsection{Edit parameters\+:}\label{md_rs_filters_README1_autotoc_md7}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gedit \string~/catkin\_ws/src/turtlebot3/turtlebot3\_slam/config/gmapping\_params.yaml}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md8}{}\doxyparagraph{Replace with\+:}\label{md_rs_filters_README1_autotoc_md8}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{map\_update\_interval: 3.0}
+\DoxyCodeLine{maxUrange: 5.0}
+\DoxyCodeLine{sigma: 0.05}
+\DoxyCodeLine{kernelSize: 1}
+\DoxyCodeLine{lstep: 0.05}
+\DoxyCodeLine{astep: 0.05}
+\DoxyCodeLine{iterations: 10}
+\DoxyCodeLine{lsigma: 0.075}
+\DoxyCodeLine{ogain: 3.0}
+\DoxyCodeLine{lskip: 0}
+\DoxyCodeLine{minimumScore: 50}
+\DoxyCodeLine{srr: 0.1}
+\DoxyCodeLine{srt: 0.2}
+\DoxyCodeLine{str: 0.1}
+\DoxyCodeLine{stt: 0.2}
+\DoxyCodeLine{linearUpdate: 0.5}
+\DoxyCodeLine{angularUpdate: 0.2}
+\DoxyCodeLine{temporalUpdate: 1.0}
+\DoxyCodeLine{resampleThreshold: 0.5}
+\DoxyCodeLine{particles: 200}
+\DoxyCodeLine{xmin: -\/5.0}
+\DoxyCodeLine{ymin: -\/7.5}
+\DoxyCodeLine{xmax: 5.0}
+\DoxyCodeLine{ymax: 7.5}
+\DoxyCodeLine{delta: 0.05}
+\DoxyCodeLine{llsamplerange: 0.01}
+\DoxyCodeLine{llsamplestep: 0.01}
+\DoxyCodeLine{lasamplerange: 0.005}
+\DoxyCodeLine{lasamplestep: 0.005}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md9}{}\doxysubsubsection{Edit launch file configuration\+:}\label{md_rs_filters_README1_autotoc_md9}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gedit \string~/catkin\_ws/src/turtlebot3/turtlebot3\_navigation/launch/amcl.launch}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md10}{}\doxyparagraph{Replace with (subscribing to /noisy\+\_\+odom and)\+:}\label{md_rs_filters_README1_autotoc_md10}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<param name="odom\_frame\_id"             value="noisy\_odom"/>}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md11}{}\doxyparagraph{Terminal\+:}\label{md_rs_filters_README1_autotoc_md11}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export TURTLEBOT3\_MODEL=waffle}
+\DoxyCodeLine{roslaunch rs\_gazebo\_world turtlebot3\_marker\_V2.launch}
+\DoxyCodeLine{}
+\DoxyCodeLine{export TURTLEBOT3\_MODEL=waffle}
+\DoxyCodeLine{roslaunch turtlebot3\_slam turtlebot3\_slam.launch slam\_methods:=gmapping}
+\DoxyCodeLine{}
+\DoxyCodeLine{export TURTLEBOT3\_MODEL=waffle}
+\DoxyCodeLine{roslaunch turtlebot3\_teleop turtlebot3\_teleop\_key.launch}
+\DoxyCodeLine{}
+\DoxyCodeLine{rosrun map\_server map\_saver -\/f \string~/map\_name}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md12}{}\doxysubsubsection{Using Particle Filter\+:}\label{md_rs_filters_README1_autotoc_md12}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export TURTLEBOT3\_MODEL=waffle}
+\DoxyCodeLine{roslaunch rs\_gazebo\_world turtlebot3\_marker\_V2.launch}
+\DoxyCodeLine{}
+\DoxyCodeLine{export TURTLEBOT3\_MODEL=waffle}
+\DoxyCodeLine{roslaunch turtlebot3\_navigation turtlebot3\_navigation.launch map\_file:=\$HOME/catkin\_ws/src/RS1-\/ProjectRover/examples/rs\_V2\_map.yaml}
+\DoxyCodeLine{}
+\DoxyCodeLine{export TURTLEBOT3\_MODEL=waffle}
+\DoxyCodeLine{roslaunch turtlebot3\_teleop turtlebot3\_teleop\_key.launch}
+\end{DoxyCode}
+
+
+\# \hypertarget{md_rs_filters_README1_autotoc_md13}{}\doxysection{installing kalman filter (robot\+\_\+pose\+\_\+ekf)}\label{md_rs_filters_README1_autotoc_md13}
+\hypertarget{md_rs_filters_README1_autotoc_md14}{}\doxysubsubsection{Clone robot\+\_\+pose\+\_\+ekf library\+:}\label{md_rs_filters_README1_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd \string~/catkin\_ws/src}
+\DoxyCodeLine{git clone https://github.com/ros-\/planning/robot\_pose\_ekf.git}
+\DoxyCodeLine{}
+\DoxyCodeLine{cd \string~/catkin\_Ws}
+\DoxyCodeLine{catkin\_make}
+\DoxyCodeLine{source devel/setup.bash}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md15}{}\doxysubsubsection{Edit launch file configuration\+:}\label{md_rs_filters_README1_autotoc_md15}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gedit \string~/catkin\_ws/src/robot\_pose\_ekf/robot\_pose\_ekf.launch}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md16}{}\doxyparagraph{Replace with (subscribing to /noisy\+\_\+odom and /imu)\+:}\label{md_rs_filters_README1_autotoc_md16}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<launch>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<node pkg="robot\_pose\_ekf" type="robot\_pose\_ekf" name="robot\_pose\_ekf">}
+\DoxyCodeLine{  <param name="output\_frame" value="odom\_combined"/>}
+\DoxyCodeLine{  <param name="base\_footprint\_frame" value="base\_footprint\_ekf"/>}
+\DoxyCodeLine{  <param name="freq" value="30.0"/>}
+\DoxyCodeLine{  <param name="sensor\_timeout" value="1.0"/>  }
+\DoxyCodeLine{  <param name="odom\_used" value="true"/>}
+\DoxyCodeLine{  <param name="imu\_used" value="true"/>}
+\DoxyCodeLine{  <param name="vo\_used" value="false"/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{  <remap from="odom" to="/noisy\_odom" />}
+\DoxyCodeLine{  <remap from="imu" to="/imu" />}
+\DoxyCodeLine{</node>}
+\DoxyCodeLine{}
+\DoxyCodeLine{</launch>}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md17}{}\doxysubsubsection{Test\+:}\label{md_rs_filters_README1_autotoc_md17}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export TURTLEBOT3\_MODEL=waffle}
+\DoxyCodeLine{roslaunch turtlebot3\_gazebo turtlebot3\_world.launch}
+\DoxyCodeLine{}
+\DoxyCodeLine{export TURTLEBOT3\_MODEL=waffle}
+\DoxyCodeLine{roslaunch turtlebot3\_gazebo turtlebot3\_gazebo\_rviz.launch}
+\DoxyCodeLine{}
+\DoxyCodeLine{rosrun rs\_odom\_noise rs\_odom\_noise\_create\_noise}
+\DoxyCodeLine{}
+\DoxyCodeLine{roslaunch robot\_pose\_ekf robot\_pose\_ekf.launch}
+\DoxyCodeLine{}
+\DoxyCodeLine{rostopic echo /robot\_pose\_ekf/odom\_combined}
+\end{DoxyCode}
+
+
+\# \hypertarget{md_rs_filters_README1_autotoc_md18}{}\doxysection{installing kalman filter (robot\+\_\+localization)}\label{md_rs_filters_README1_autotoc_md18}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd ros\_ws/src}
+\DoxyCodeLine{git clone https://github.com/cra-\/ros-\/pkg/robot\_localization.git -\/-\/branch noetic-\/devel}
+\DoxyCodeLine{cd ros\_ws/}
+\DoxyCodeLine{rosdep install -\/-\/from-\/paths src -\/-\/ignore-\/src -\/r -\/y}
+\DoxyCodeLine{catkin\_make -\/DCMAKE\_BUILD\_TYPE=Release}
+\end{DoxyCode}
+\hypertarget{md_rs_filters_README1_autotoc_md19}{}\doxysubsection{\#\# Copy these files to the launch and params folders of the $<$tt$>$robot\+\_\+localization$<$/tt$>$ library\+:}\label{md_rs_filters_README1_autotoc_md19}
+\hypertarget{md_rs_filters_README1_autotoc_md20}{}\doxysubsection{$<$a href=\char`\"{}./robot\+\_\+localization\+\_\+library\+\_\+configs/rs\+\_\+ekf.\+yaml\char`\"{}$>$config file$<$/a$>$}\label{md_rs_filters_README1_autotoc_md20}
+\hypertarget{md_rs_filters_README1_autotoc_md21}{}\doxysubsection{$<$a href=\char`\"{}./robot\+\_\+localization\+\_\+library\+\_\+configs/rs\+\_\+ekf.\+launch\char`\"{}$>$launch file$<$/a$>$}\label{md_rs_filters_README1_autotoc_md21}
+\hypertarget{md_rs_filters_README1_autotoc_md22}{}\doxysection{References\+:}\label{md_rs_filters_README1_autotoc_md22}
+\href{https://kaiyuzheng.me/documents/navguide.pdf}{\texttt{ Grid mapping Navigation Tuning}}~\newline
+ \href{https://iopscience.iop.org/article/10.1088/1742-6596/1646/1/012004/pdf}{\texttt{ Parameter Optimization Analysis of Gmapping}} 
